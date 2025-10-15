@@ -1,138 +1,319 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- ganti nama/judul website -->
-    <title>buat stephanie</title>
-    <style>
-      body {
-        /* ganti background website */
-        background-image: url(https://img.freepik.com/premium-photo/defocused-lights-form-heart-black-background_607094-211.jpg);
-      }
-    </style>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-    />
-  </head>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evan Arkana Nathanael - Berbagi Makanan & Donasi</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(180deg, #e3f2ff, #fff7e6);
+      margin: 0;
+      padding: 0;
+      color: #003366;
+    }
+    header {
+      background-color: #005fb8;
+      color: white;
+      padding: 25px 10px;
+      text-align: center;
+      font-size: 1.8em;
+      font-weight: bold;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    }
+    header p {
+      font-size: 0.9em;
+      margin-top: 5px;
+      color: #d6eaff;
+    }
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px;
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 20px;
+      width: 90%;
+      max-width: 1000px;
+    }
+    .card {
+      background-color: #fffaf0;
+      border-radius: 15px;
+      border: 2px solid #cce0ff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: transform 0.2s;
+      padding: 15px;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card img {
+      width: 100%;
+      border-radius: 12px;
+      height: 160px;
+      object-fit: cover;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 15px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background-color: #005ec2;
+    }
+    #formContainer, #donationContainer {
+      background-color: #fffaf0;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      padding: 25px;
+      width: 90%;
+      max-width: 420px;
+      margin-top: 25px;
+      display: none;
+      border: 2px solid #cce0ff;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1em;
+    }
+    .donation-btn {
+      background-color: #00b33c;
+    }
+    .donation-btn:hover {
+      background-color: #00992f;
+    }
+    .gopay-box {
+      background-color: #f0f8ff;
+      border: 1px dashed #007bff;
+      padding: 10px;
+      border-radius: 10px;
+      margin-top: 15px;
+      text-align: center;
+    }
+    .gopay-box button {
+      background-color: #007bff;
+      margin-top: 8px;
+      font-size: 0.9em;
+    }
+    /* Pop-up Riwayat */
+    #historyPopup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+    }
+    .popup-content {
+      background: #fffaf0;
+      padding: 20px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 600px;
+      border: 2px solid #cce0ff;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      text-align: left;
+      overflow-y: auto;
+      max-height: 80vh;
+    }
+    .popup-content h3 {
+      text-align: center;
+      color: #005fb8;
+    }
+    .close-btn {
+      background-color: #ff4d4d;
+      float: right;
+    }
+    .close-btn:hover {
+      background-color: #cc0000;
+    }
+    .order-item {
+      background: #e3f2ff;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    Evan Arkana Nathanael<br>
+    <p>💙 Berbagi Makanan, Menebar Kebaikan 💛</p>
+  </header>
+  <main>
+    <h2>Pilih Produk Makanan Indonesia</h2>
+    <div class="product-grid" id="productList"></div>
 
-  <body class="justify-center flex">
-    <main
-      class="bg-white rounded mt-24 p-8 shadow-lg shadow-red-200 animate__animated animate__backInDown"
-    >
-      <!-- ganti gambar awal -->
-      <img
-        class="cat-img"
-        src="https://media.tenor.com/cofRHcGGOfoAAAAi/shy-cute.gif"
-        alt="Picture of a cat"
-        width="200"
-      />
-      <div class="border-b mt-2 border-2"></div>
-      <div class="lh-1 text-center mt-4">
-        <!-- ganti nama -->
-        <h2 class="title text-red-400 text-xl font-semibold">
-          Hei steph,
-        </h2>
-        <!-- ganti pertanyaan -->
-        <p class="title question fs-1 text-2xl font-bold text-gray-700">haii boleh kenalan</p>
+    <div id="formContainer">
+      <h3>Pesan Makanan</h3>
+      <form id="orderForm">
+        <label for="productName">Nama Produk:</label>
+        <input type="text" id="productName" readonly>
+
+        <label for="quantity">Jumlah Makanan:</label>
+        <input type="number" id="quantity" min="1" value="1" required>
+
+        <label for="delivery">Metode Pengambilan:</label>
+        <select id="delivery" required>
+          <option value="Antar">Antar ke alamat</option>
+          <option value="Ambil di Tempat">Ambil di tempat</option>
+        </select>
+
+        <label for="address">Alamat (jika diantar):</label>
+        <textarea id="address" rows="3" placeholder="Masukkan alamat lengkap"></textarea>
+
+        <label for="notes">Catatan:</label>
+        <textarea id="notes" rows="2" placeholder="(opsional)"></textarea>
+
+        <button type="submit">Kirim Pesanan</button>
+      </form>
+    </div>
+
+    <button onclick="showDonationForm()" class="donation-btn" style="margin-top:30px;">💚 Donasi Sekarang</button>
+    <button onclick="showHistory()" style="margin-top:15px;">📜 Lihat Riwayat Pesanan</button>
+
+    <div id="donationContainer">
+      <h3>Donasi untuk Membantu Orang Lain</h3>
+      <form id="donationForm">
+        <label for="donorName">Nama Donatur:</label>
+        <input type="text" id="donorName" placeholder="Nama kamu" required>
+
+        <label for="donationAmount">Jumlah Donasi (Rp):</label>
+        <input type="number" id="donationAmount" min="1000" placeholder="Minimal 1000" required>
+
+        <label for="message">Pesan (opsional):</label>
+        <textarea id="message" rows="2" placeholder="Tuliskan pesan kebaikanmu"></textarea>
+
+        <button type="submit" class="donation-btn">Kirim Donasi</button>
+      </form>
+      <div id="gopayBox" class="gopay-box" style="display:none;">
+        <strong>Terima kasih atas donasimu! 💙</strong><br>
+        Kirim donasi ke nomor GoPay berikut:<br>
+        <h3>700010882002395200</h3>
+        <button onclick="copyGoPay()">Salin Nomor GoPay</button>
       </div>
-      <div class="buttons mt-5 flex justify-around">
-        <!-- ganti tulisan tombol -->
-        <button
-          type="button"
-          class="btn-yes bg-green-500 rounded text-white text-3xl px-2 pt-1 pb-2 animate__pulse animate__animated animate__infinite"
-        >
-          yes
-        </button>
-        <button
-          type="button"
-          class="btn-no bg-red-500 rounded text-white text-2xl px-2 pt-1 pb-2"
-        >
-          no
-        </button>
-      </div>
-      <div class="numbers hidden mt-5 flex justify-center">
-        <!-- ganti link -->
-        <a
-          href="https://wa.me/62882002395200"
-          type="button"
-          class="bg-green-500 text-white py-1 px-2 rounded btn-yes w-100 text-xl font-bold"
-        >
-          <!-- ganti tulisan tombol link -->
-          Chat aku</a
-        >
-      </div>
-    </main>
+    </div>
+  </main>
 
-    <script>
-      const titleElement = document.querySelector(".title");
-      const buttonsContainer = document.querySelector(".buttons");
-      const numberContainer = document.querySelector(".numbers");
-      const yesButton = document.querySelector(".btn-yes");
-      const noButton = document.querySelector(".btn-no");
-      const catImg = document.querySelector(".cat-img");
-      const title = document.querySelector(".title");
-      const question = document.querySelector(".question");
+  <!-- Pop-up Riwayat -->
+  <div id="historyPopup">
+    <div class="popup-content">
+      <button class="close-btn" onclick="closeHistory()">Tutup ✖</button>
+      <h3>📜 Riwayat Pemesanan</h3>
+      <div id="historyList"></div>
+    </div>
+  </div>
 
-      // jumlah gambar
-      const MAX_IMAGES = 5;
+  <script>
+    const products = [
+      { name: 'Nasi Padang', img: 'https://upload.wikimedia.org/wikipedia/commons/8/8e/Nasi_Padang.jpg' },
+      { name: 'Soto Ayam Lamongan', img: 'https://upload.wikimedia.org/wikipedia/commons/2/27/Soto_Ayam_Lamongan.jpg' },
+      { name: 'Rendang Daging', img: 'https://upload.wikimedia.org/wikipedia/commons/8/85/Rendang_daging_sapi.jpg' },
+      { name: 'Bakso Malang', img: 'https://upload.wikimedia.org/wikipedia/commons/2/23/Bakso_malang_2.jpg' },
+      { name: 'Gudeg Jogja', img: 'https://upload.wikimedia.org/wikipedia/commons/4/43/Gudeg_jogja.jpg' },
+      { name: 'Sate Ayam Madura', img: 'https://upload.wikimedia.org/wikipedia/commons/9/9d/Sate_Ayam_Madura.jpg' },
+      { name: 'Nasi Goreng Spesial', img: 'https://upload.wikimedia.org/wikipedia/commons/6/6f/Nasi_goreng_spesial.jpg' },
+      { name: 'Gado-Gado Betawi', img: 'https://upload.wikimedia.org/wikipedia/commons/2/28/Gado-gado.jpg' },
+    ];
 
-      let play = true;
-      let count = 0;
+    const productList = document.getElementById('productList');
+    const formContainer = document.getElementById('formContainer');
+    const productNameInput = document.getElementById('productName');
+    const orderForm = document.getElementById('orderForm');
+    const donationContainer = document.getElementById('donationContainer');
+    const gopayBox = document.getElementById('gopayBox');
+    const historyPopup = document.getElementById('historyPopup');
+    const historyList = document.getElementById('historyList');
 
-      // ganti gambar pake link gif yang kalian mau
-      let listGambar = [
-        "https://media1.tenor.com/m/BbSkyx3DaEgAAAAd/goma-sad.gif",
-        "https://media.tenor.com/M9WbqMQ2ISwAAAAi/annoyed.gif",
-        "https://i.pinimg.com/originals/96/43/2e/96432e7570c1d014a84085379ba369d7.gif",
-        "https://i.pinimg.com/originals/e1/64/7b/e1647b7fd330918520b12076a8a2dfcd.gif",
-        "https://media1.tenor.com/m/M_5Qg9ok3HQAAAAC/cat-pout.gif",
+    products.forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <img src="${p.img}" alt="${p.name}">
+        <h4>${p.name}</h4>
+        <button onclick="selectProduct('${p.name}')">Pilih</button>
+      `;
+      productList.appendChild(card);
+    });
 
-        // gambar kalo dijawab ya
-        "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNW9temgzcjlieHJtOXM2YXhoeW94N2k2c3ljcmtpYTZ4NnBicm0ybyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/f9EmXxglhdhAj1bo28/giphy.webp",
-      ];
+    function selectProduct(name) {
+      formContainer.style.display = 'block';
+      donationContainer.style.display = 'none';
+      productNameInput.value = name;
+      window.scrollTo({ top: formContainer.offsetTop, behavior: 'smooth' });
+    }
 
-      yesButton.addEventListener("click", handleYesClick);
+    orderForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const order = {
+        produk: productNameInput.value,
+        jumlah: document.getElementById('quantity').value,
+        metode: document.getElementById('delivery').value,
+        alamat: document.getElementById('address').value,
+        catatan: document.getElementById('notes').value,
+        waktu: new Date().toLocaleString()
+      };
 
-      noButton.addEventListener("click", function () {
-        title.classList.add("hidden");
-        question.classList.add("hidden");
-        if (play) {
-          count++;
-          const imageIndex = Math.min(count, MAX_IMAGES);
-          changeImage(imageIndex);
-          updateNoButtonText();
-          if (count === MAX_IMAGES) {
-            play = false;
-          }
-        }
-      });
+      let orders = JSON.parse(localStorage.getItem('orders')) || [];
+      orders.push(order);
+      localStorage.setItem('orders', JSON.stringify(orders));
 
-      function handleYesClick() {
-        buttonsContainer.classList.add("hidden");
-        title.classList.add("hidden");
-        question.classList.add("hidden");
-        numberContainer.classList.remove("hidden");
-        changeImage(6);
-      }
+      alert(`Pesanan ${order.jumlah} ${order.produk} (${order.metode}) berhasil dikirim!`);
+      orderForm.reset();
+      formContainer.style.display = 'none';
+    });
 
-      // ganti kata-kata kalo ditolak
-      function generateMessage(count) {
-        const messages = ["no", "hmm?", "yakin?", "klik yes", "huftt..", "<-- please"];
+    function showDonationForm() {
+      donationContainer.style.display = 'block';
+      formContainer.style.display = 'none';
+      gopayBox.style.display = 'none';
+      window.scrollTo({ top: donationContainer.offsetTop, behavior: 'smooth' });
+    }
 
-        const messageIndex = Math.min(count, messages.length - 1);
-        return messages[messageIndex];
-      }
+    document.getElementById('donationForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      gopayBox.style.display = 'block';
+      window.scrollTo({ top: gopayBox.offsetTop, behavior: 'smooth' });
+    });
 
-      function changeImage(imageIndex) {
-        catImg.src = `${listGambar[imageIndex - 1]}`;
-      }
+    function copyGoPay() {
+      navigator.clipboard.writeText('700010882002395200');
+      alert('Nomor GoPay telah disalin ke clipboard!');
+    }
 
-      function updateNoButtonText() {
-        noButton.innerHTML = generateMessage(count);
-      }
-    </script>
-  </body>
+    function showHistory() {
+      const orders = JSON.parse(localStorage.getItem('orders')) || [];
+      historyList.innerHTML = orders.length
+        ? orders.map(o => `
+          <div class='order-item'>
+            <strong>${o.produk}</strong> (${o.jumlah})<br>
+            <em>Metode:</em> ${o.metode}<br>
+            <em>Alamat:</em> ${o.alamat || '-'}<br>
+            <em>Catatan:</em> ${o.catatan || '-'}<br>
+            <em>Waktu:</em> ${o.waktu}
+          </div>
+        `).join('')
+        : '<p>Belum ada pesanan.</p>';
+      historyPopup.style.display = 'flex';
+    }
+
+    function closeHistory() {
+      historyPopup.style.display = 'none';
+    }
+  </script>
+</body>
 </html>
