@@ -1,319 +1,306 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Evan Arkana Nathanael - Berbagi Makanan & Donasi</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Aksi Melawan Kelaparan — Evan · Arkana · Nathanael</title>
+  <meta name="description" content="Tim Evan, Arkana, dan Nathanael — inisiatif komunitas untuk mengurangi kelaparan dunia lewat distribusi pangan, edukasi, dan teknologi." />
   <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(180deg, #e3f2ff, #fff7e6);
-      margin: 0;
-      padding: 0;
-      color: #003366;
-    }
-    header {
-      background-color: #005fb8;
-      color: white;
-      padding: 25px 10px;
-      text-align: center;
-      font-size: 1.8em;
-      font-weight: bold;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-    }
-    header p {
-      font-size: 0.9em;
-      margin-top: 5px;
-      color: #d6eaff;
-    }
-    main {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 30px;
-    }
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 20px;
-      width: 90%;
-      max-width: 1000px;
-    }
-    .card {
-      background-color: #fffaf0;
-      border-radius: 15px;
-      border: 2px solid #cce0ff;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      transition: transform 0.2s;
-      padding: 15px;
-    }
-    .card:hover {
-      transform: translateY(-5px);
-    }
-    .card img {
-      width: 100%;
-      border-radius: 12px;
-      height: 160px;
-      object-fit: cover;
-    }
-    button {
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      padding: 10px 15px;
-      cursor: pointer;
-      margin-top: 10px;
-      transition: background 0.3s;
-    }
-    button:hover {
-      background-color: #005ec2;
-    }
-    #formContainer, #donationContainer {
-      background-color: #fffaf0;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-      padding: 25px;
-      width: 90%;
-      max-width: 420px;
-      margin-top: 25px;
-      display: none;
-      border: 2px solid #cce0ff;
-    }
-    input, select, textarea {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 1em;
-    }
-    .donation-btn {
-      background-color: #00b33c;
-    }
-    .donation-btn:hover {
-      background-color: #00992f;
-    }
-    .gopay-box {
-      background-color: #f0f8ff;
-      border: 1px dashed #007bff;
-      padding: 10px;
-      border-radius: 10px;
-      margin-top: 15px;
-      text-align: center;
-    }
-    .gopay-box button {
-      background-color: #007bff;
-      margin-top: 8px;
-      font-size: 0.9em;
-    }
-    /* Pop-up Riwayat */
-    #historyPopup {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.6);
-      justify-content: center;
-      align-items: center;
-    }
-    .popup-content {
-      background: #fffaf0;
-      padding: 20px;
-      border-radius: 15px;
-      width: 90%;
-      max-width: 600px;
-      border: 2px solid #cce0ff;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-      text-align: left;
-      overflow-y: auto;
-      max-height: 80vh;
-    }
-    .popup-content h3 {
-      text-align: center;
-      color: #005fb8;
-    }
-    .close-btn {
-      background-color: #ff4d4d;
-      float: right;
-    }
-    .close-btn:hover {
-      background-color: #cc0000;
-    }
-    .order-item {
-      background: #e3f2ff;
-      margin: 10px 0;
-      padding: 10px;
-      border-radius: 10px;
-    }
+    :root{--bg:#0f1724;--card:#0b1320;--accent:#22c1c3;--muted:#aab3c1;--glass: rgba(255,255,255,0.04);} 
+    *{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,'Helvetica Neue',Arial; background:linear-gradient(180deg,#071025 0%, #0b1220 100%);color:#e6eef6;line-height:1.5}
+    header{padding:32px 20px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:14px}
+    .logo{width:56px;height:56px;background:linear-gradient(45deg,var(--accent),#6b8cff);border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;color:#051422}
+    h1{margin:0;font-size:20px}
+    .nav{display:flex;gap:12px}
+    .btn{background:var(--accent);color:#041018;padding:8px 14px;border-radius:10px;text-decoration:none;font-weight:600}
+    main{padding:20px}
+    .hero{display:grid;grid-template-columns:1fr;gap:20px;align-items:center;max-width:1100px;margin:0 auto}
+    .hero-inner{background:var(--glass);padding:22px;border-radius:12px;backdrop-filter:blur(6px);box-shadow:0 6px 30px rgba(2,6,23,0.6)}
+    .lead{font-size:18px;margin:0 0 12px;color:#dff6f6}
+    .kpis{display:flex;gap:12px;flex-wrap:wrap}
+    .card{background:linear-gradient(180deg,#071220,#081526);padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);min-width:140px}
+    .members{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:20px}
+    .member{background:var(--card);padding:16px;border-radius:12px}
+    .avatar{width:72px;height:72px;border-radius:12px;display:inline-grid;place-items:center;font-weight:700}
+    .projects{margin-top:22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+    .project{background:linear-gradient(180deg,#051428,#06182a);padding:14px;border-radius:12px}
+    form{display:grid;gap:8px}
+    input,textarea,select{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px;border-radius:8px;color:inherit}
+    label{font-size:13px;color:var(--muted)}
+    footer{padding:24px;text-align:center;color:var(--muted)}
+    .gopay-box{background:linear-gradient(180deg,#06192b,#05202f);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);margin-top:10px}
+    .gopay-number{font-size:18px;font-weight:700}
+    .small-muted{font-size:13px;color:var(--muted)}
+    @media(min-width:900px){.hero{grid-template-columns:1fr 420px}}
   </style>
 </head>
 <body>
   <header>
-    Evan Arkana Nathanael<br>
-    <p>💙 Berbagi Makanan, Menebar Kebaikan 💛</p>
-  </header>
-  <main>
-    <h2>Pilih Produk Makanan Indonesia</h2>
-    <div class="product-grid" id="productList"></div>
-
-    <div id="formContainer">
-      <h3>Pesan Makanan</h3>
-      <form id="orderForm">
-        <label for="productName">Nama Produk:</label>
-        <input type="text" id="productName" readonly>
-
-        <label for="quantity">Jumlah Makanan:</label>
-        <input type="number" id="quantity" min="1" value="1" required>
-
-        <label for="delivery">Metode Pengambilan:</label>
-        <select id="delivery" required>
-          <option value="Antar">Antar ke alamat</option>
-          <option value="Ambil di Tempat">Ambil di tempat</option>
-        </select>
-
-        <label for="address">Alamat (jika diantar):</label>
-        <textarea id="address" rows="3" placeholder="Masukkan alamat lengkap"></textarea>
-
-        <label for="notes">Catatan:</label>
-        <textarea id="notes" rows="2" placeholder="(opsional)"></textarea>
-
-        <button type="submit">Kirim Pesanan</button>
-      </form>
-    </div>
-
-    <button onclick="showDonationForm()" class="donation-btn" style="margin-top:30px;">💚 Donasi Sekarang</button>
-    <button onclick="showHistory()" style="margin-top:15px;">📜 Lihat Riwayat Pesanan</button>
-
-    <div id="donationContainer">
-      <h3>Donasi untuk Membantu Orang Lain</h3>
-      <form id="donationForm">
-        <label for="donorName">Nama Donatur:</label>
-        <input type="text" id="donorName" placeholder="Nama kamu" required>
-
-        <label for="donationAmount">Jumlah Donasi (Rp):</label>
-        <input type="number" id="donationAmount" min="1000" placeholder="Minimal 1000" required>
-
-        <label for="message">Pesan (opsional):</label>
-        <textarea id="message" rows="2" placeholder="Tuliskan pesan kebaikanmu"></textarea>
-
-        <button type="submit" class="donation-btn">Kirim Donasi</button>
-      </form>
-      <div id="gopayBox" class="gopay-box" style="display:none;">
-        <strong>Terima kasih atas donasimu! 💙</strong><br>
-        Kirim donasi ke nomor GoPay berikut:<br>
-        <h3>700010882002395200</h3>
-        <button onclick="copyGoPay()">Salin Nomor GoPay</button>
+    <div class="brand">
+      <div class="logo">AMD</div>
+      <div>
+        <h1>Aksi Melawan Kelaparan</h1>
+        <div style="font-size:13px;color:var(--muted)">Tim: Evan · Arkana · Nathanael</div>
       </div>
     </div>
+    <nav class="nav">
+      <a class="btn" href="#donasi">Donasi</a>
+      <a class="btn" href="#volunteer">Gabung</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-inner">
+        <p class="lead"><strong>Misi kami:</strong> Mengurangi kelaparan melalui distribusi makanan lokal, edukasi pertanian skala mikro, dan teknologi pendukung — dipimpin oleh Evan, Arkana, dan Nathanael.</p>
+
+        <div class="kpis">
+          <div class="card">
+            <div style="font-size:26px;font-weight:700">12.4k</div>
+            <div style="font-size:12px;color:var(--muted)">Porsi tersalurkan</div>
+          </div>
+          <div class="card">
+            <div style="font-size:26px;font-weight:700">38</div>
+            <div style="font-size:12px;color:var(--muted)">Komunitas partner</div>
+          </div>
+          <div class="card">
+            <div style="font-size:26px;font-weight:700">+3</div>
+            <div style="font-size:12px;color:var(--muted)">Program aktif</div>
+          </div>
+        </div>
+
+        <h3 style="margin-top:18px">Cara kami bekerja</h3>
+        <ol style="color:var(--muted)">
+          <li>Identifikasi area rawan pangan dan partner lokal.</li>
+          <li>Distribusi bahan makanan berkelanjutan dan paket nutrisi.</li>
+          <li>Pelatihan bercocok tanam skala rumah dan pengolahan makanan.
+          </li>
+          <li>Menggunakan data untuk menargetkan bantuan secara efektif.</li>
+        </ol>
+      </div>
+
+      <aside class="hero-aside">
+        <div class="card">
+          <h4>Terlibat sekarang</h4>
+          <p style="color:var(--muted)">Isi formulir volunteer atau lakukan donasi—setiap kontribusi kecil penting.</p>
+          <a class="btn" href="#volunteer">Daftar Volunteer</a>
+        </div>
+        <div style="height:12px"></div>
+        <div class="card">
+          <h4>Hubungi tim</h4>
+          <p style="color:var(--muted);font-size:13px">email: tim@aksi-lapar.org <br>lokal: Jakarta, Indonesia <br>No:0882002395200
+        </div>
+      </aside>
+    </section>
+    
+    <section style="margin-top:26px">
+      <h2>Anggota inti</h2>
+      <div class="members">
+        <article class="member">
+          <div style="display:flex;gap:12px;align-items:center">
+            <div class="avatar" style="background:linear-gradient(90deg,#e6fffb,#bdebf0);color:#052224">E</div>
+            <div>
+              <strong>Evan</strong>
+              <div style="font-size:13px;color:var(--muted)">Koordinator lapangan — logistik & kemitraan</div>
+            </div>
+          </div>
+          <p style="color:var(--muted);margin-top:10px;font-size:14px">Evan mengatur distribusi bahan pangan, monitoring stok dan menjalin kerja sama dengan bank pangan lokal.</p>
+        </article>
+
+        <article class="member">
+          <div style="display:flex;gap:12px;align-items:center">
+            <div class="avatar" style="background:linear-gradient(90deg,#fff2c6,#ffd9b3);color:#2b1a00">A</div>
+            <div>
+              <strong>Arkana</strong>
+              <div style="font-size:13px;color:var(--muted)">Program edukasi — pertanian urban</div>
+            </div>
+          </div>
+          <p style="color:var(--muted);margin-top:10px;font-size:14px">Arkana merancang modul pelatihan bercocok-tanam skala rumah dan teknik penyimpanan makanan untuk komunitas.</p>
+        </article>
+
+        <article class="member">
+          <div style="display:flex;gap:12px;align-items:center">
+            <div class="avatar" style="background:linear-gradient(90deg,#e6e7ff,#d4d8ff);color:#06103f">N</div>
+            <div>
+              <strong>Nathanael</strong>
+              <div style="font-size:13px;color:var(--muted)">Teknologi & data</div>
+            </div>
+          </div>
+          <p style="color:var(--muted);margin-top:10px;font-size:14px">Nathanael membuat dashboard sederhana untuk memetakan kebutuhan dan melaporkan dampak program.</p>
+        </article>
+      </div>
+    </section>
+
+    <section style="margin-top:22px">
+      <h2>Program & proyek</h2>
+      <div class="projects">
+        <div class="project">
+          <h3>Distribusi Paket Gizi</h3>
+          <p style="color:var(--muted)">Paket bahan makanan seimbang untuk keluarga terdampak. Bermitra dengan koperasi tani dan bank makanan.</p>
+          <p style="margin-top:8px;font-size:13px;color:var(--muted)"><strong>Tujuan:</strong> 10.000 paket/tahun</p>
+        </div>
+
+        <div class="project">
+          <h3>Pelatihan Urban Farming</h3>
+          <p style="color:var(--muted)">Workshop praktis menanam sayur di pot, kebun kecil, pemupukan organik, dan penyimpanan hasil panen.</p>
+          <p style="margin-top:8px;font-size:13px;color:var(--muted)"><strong>Output:</strong> 150 keluarga terlatih</p>
+        </div>
+
+        <div class="project">
+          <h3>Data Lokasi Kebutuhan</h3>
+          <p style="color:var(--muted)">Pemetaan lokasi rawan dan laporan real-time untuk mengarahkan bantuan secara efisien.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="donasi" style="margin-top:22px">
+      <h2>Donasi</h2>
+      <div style="display:grid;grid-template-columns:1fr 320px;gap:14px;align-items:start">
+        <div class="card">
+          <p style="color:var(--muted)">Masukkan jumlah donasi .</p>
+          <form id="donationForm">
+            <label for="amount">Jumlah (IDR)</label>
+            <input id="amount" name="amount" type="number" min="1000" placeholder="100000" required />
+
+            <label for="message">Pesan (opsional)</label>
+            <textarea id="message" name="message" rows="3" placeholder="Dukungan untuk program distribusi"></textarea>
+
+            <button type="submit" class="btn">Kirim</button>
+          </form>
+          <div id="donationResult" style="margin-top:10px;color:var(--muted)"></div>
+
+          <!-- Box untuk menampilkan info pembayaran GoPay -->
+          <div id="gopayBox" class="gopay-box" style="display:none">
+            <div class="small-muted">Scan atau salin nomor GoPay berikut untuk menyelesaikan donasi:</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px">
+              <div>
+                <div class="gopay-number" id="gopayNumber">700010882002395200</div>
+                <div class="small-muted" style="margin-top:6px">A/n: Aksi Melawan Kelaparan</div>
+              </div>
+              <div style="display:flex;gap:8px;align-items:center">
+                <button id="copyBtn" class="btn" style="padding:8px 10px">Salin</button>
+                <button id="doneBtn" class="btn" style="background:#7bd389;color:#04210a">Selesai</button>
+              </div>
+            </div>
+            <div id="gopayHint" class="small-muted" style="margin-top:8px">Setelah mentransfer, klik "Selesai" untuk kembali.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h4>Rekap singkat</h4>
+          <div id="donationSummary" style="color:var(--muted);font-size:14px">Belum ada donasi test.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="volunteer" style="margin-top:22px">
+      <h2>Gabung sebagai Volunteer</h2>
+      <div class="card">
+        <form id="volForm">
+          <label for="nama">Nama lengkap</label>
+          <input id="nama" required />
+          <label for="email">Email</label>
+          <input id="email" type="email" required />
+          <label for="kota">Kota</label>
+          <input id="kota" placeholder="Contoh: Bandung" />
+          <label for="peran">Minat peran</label>
+          <select id="peran">
+            <option>Distribusi</option>
+            <option>Pelatihan</option>
+            <option>Teknologi & data</option>
+            <option>Lainnya</option>
+          </select>
+          <button type="submit" class="btn">Daftar Volunteer</button>
+        </form>
+        <div id="volMsg" style="color:var(--muted);margin-top:10px">Belum ada pendaftaran.</div>
+      </div>
+    </section>
+
   </main>
 
-  <!-- Pop-up Riwayat -->
-  <div id="historyPopup">
-    <div class="popup-content">
-      <button class="close-btn" onclick="closeHistory()">Tutup ✖</button>
-      <h3>📜 Riwayat Pemesanan</h3>
-      <div id="historyList"></div>
-    </div>
-  </div>
+  <footer>
+    <div style="max-width:900px;margin:0 auto">© 2025 Aksi Melawan Kelaparan — Evan · Arkana · Nathanael. Ini adalah contoh halaman untuk prototipe komunitas.</div>
+  </footer>
 
   <script>
-    const products = [
-      { name: 'Nasi Padang', img: 'https://upload.wikimedia.org/wikipedia/commons/8/8e/Nasi_Padang.jpg' },
-      { name: 'Soto Ayam Lamongan', img: 'https://upload.wikimedia.org/wikipedia/commons/2/27/Soto_Ayam_Lamongan.jpg' },
-      { name: 'Rendang Daging', img: 'https://upload.wikimedia.org/wikipedia/commons/8/85/Rendang_daging_sapi.jpg' },
-      { name: 'Bakso Malang', img: 'https://upload.wikimedia.org/wikipedia/commons/2/23/Bakso_malang_2.jpg' },
-      { name: 'Gudeg Jogja', img: 'https://upload.wikimedia.org/wikipedia/commons/4/43/Gudeg_jogja.jpg' },
-      { name: 'Sate Ayam Madura', img: 'https://upload.wikimedia.org/wikipedia/commons/9/9d/Sate_Ayam_Madura.jpg' },
-      { name: 'Nasi Goreng Spesial', img: 'https://upload.wikimedia.org/wikipedia/commons/6/6f/Nasi_goreng_spesial.jpg' },
-      { name: 'Gado-Gado Betawi', img: 'https://upload.wikimedia.org/wikipedia/commons/2/28/Gado-gado.jpg' },
-    ];
-
-    const productList = document.getElementById('productList');
-    const formContainer = document.getElementById('formContainer');
-    const productNameInput = document.getElementById('productName');
-    const orderForm = document.getElementById('orderForm');
-    const donationContainer = document.getElementById('donationContainer');
+    // Donasi (simulasi)
+    const donationForm = document.getElementById('donationForm');
+    const donationResult = document.getElementById('donationResult');
+    const donationSummary = document.getElementById('donationSummary');
     const gopayBox = document.getElementById('gopayBox');
-    const historyPopup = document.getElementById('historyPopup');
-    const historyList = document.getElementById('historyList');
+    const gopayNumberEl = document.getElementById('gopayNumber');
+    const copyBtn = document.getElementById('copyBtn');
+    const doneBtn = document.getElementById('doneBtn');
+    const GOPAY_NUMBER = '700010882002395200';
 
-    products.forEach(p => {
-      const card = document.createElement('div');
-      card.className = 'card';
-      card.innerHTML = `
-        <img src="${p.img}" alt="${p.name}">
-        <h4>${p.name}</h4>
-        <button onclick="selectProduct('${p.name}')">Pilih</button>
-      `;
-      productList.appendChild(card);
-    });
-
-    function selectProduct(name) {
-      formContainer.style.display = 'block';
-      donationContainer.style.display = 'none';
-      productNameInput.value = name;
-      window.scrollTo({ top: formContainer.offsetTop, behavior: 'smooth' });
-    }
-
-    orderForm.addEventListener('submit', (e) => {
+    donationForm.addEventListener('submit', e => {
       e.preventDefault();
-      const order = {
-        produk: productNameInput.value,
-        jumlah: document.getElementById('quantity').value,
-        metode: document.getElementById('delivery').value,
-        alamat: document.getElementById('address').value,
-        catatan: document.getElementById('notes').value,
-        waktu: new Date().toLocaleString()
-      };
+      const amt = Number(document.getElementById('amount').value) || 0;
+      const msg = document.getElementById('message').value || '';
+      if(amt < 1000){ donationResult.textContent = 'Masukkan jumlah minimal 1.000 IDR'; return }
+      // simpan ke localStorage sebagai contoh
+      const donations = JSON.parse(localStorage.getItem('donations')||'[]');
+      donations.push({amount:amt,message:msg,date:new Date().toISOString()});
+      localStorage.setItem('donations',JSON.stringify(donations));
 
-      let orders = JSON.parse(localStorage.getItem('orders')) || [];
-      orders.push(order);
-      localStorage.setItem('orders', JSON.stringify(orders));
-
-      alert(`Pesanan ${order.jumlah} ${order.produk} (${order.metode}) berhasil dikirim!`);
-      orderForm.reset();
-      formContainer.style.display = 'none';
-    });
-
-    function showDonationForm() {
-      donationContainer.style.display = 'block';
-      formContainer.style.display = 'none';
-      gopayBox.style.display = 'none';
-      window.scrollTo({ top: donationContainer.offsetTop, behavior: 'smooth' });
-    }
-
-    document.getElementById('donationForm').addEventListener('submit', (e) => {
-      e.preventDefault();
+      // Tampilkan konfirmasi dan nomor GoPay
+      donationResult.textContent = `Terima kasih — donasi test tercatat: IDR ${amt.toLocaleString()}`;
+      gopayNumberEl.textContent = GOPAY_NUMBER;
       gopayBox.style.display = 'block';
-      window.scrollTo({ top: gopayBox.offsetTop, behavior: 'smooth' });
+      // fokus dan scroll ke box supaya user lihat
+      gopayBox.scrollIntoView({behavior: 'smooth', block: 'center'});
+
+      renderDonationSummary();
+      // jangan reset form agar pengguna tahu jumlahnya (opsional)
+      // donationForm.reset();
     });
 
-    function copyGoPay() {
-      navigator.clipboard.writeText('700010882002395200');
-      alert('Nomor GoPay telah disalin ke clipboard!');
-    }
+    // salin ke clipboard
+    copyBtn.addEventListener('click', async ()=>{
+      try{
+        await navigator.clipboard.writeText(GOPAY_NUMBER);
+        copyBtn.textContent = 'Tersalin';
+        setTimeout(()=> copyBtn.textContent = 'Salin',1500);
+      }catch(err){
+        // fallback: pilih teks
+        const range = document.createRange();
+        range.selectNode(gopayNumberEl);
+        const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(range);
+        try{ document.execCommand('copy'); copyBtn.textContent = 'Tersalin'; setTimeout(()=> copyBtn.textContent = 'Salin',1500);}catch(e){ alert('Gagal menyalin, silakan salin manual.'); }
+      }
+    });
 
-    function showHistory() {
-      const orders = JSON.parse(localStorage.getItem('orders')) || [];
-      historyList.innerHTML = orders.length
-        ? orders.map(o => `
-          <div class='order-item'>
-            <strong>${o.produk}</strong> (${o.jumlah})<br>
-            <em>Metode:</em> ${o.metode}<br>
-            <em>Alamat:</em> ${o.alamat || '-'}<br>
-            <em>Catatan:</em> ${o.catatan || '-'}<br>
-            <em>Waktu:</em> ${o.waktu}
-          </div>
-        `).join('')
-        : '<p>Belum ada pesanan.</p>';
-      historyPopup.style.display = 'flex';
-    }
+    // selesai: sembunyikan box
+    doneBtn.addEventListener('click', ()=>{
+      gopayBox.style.display = 'none';
+      donationForm.reset();
+    });
 
-    function closeHistory() {
-      historyPopup.style.display = 'none';
+    function renderDonationSummary(){
+      const donations = JSON.parse(localStorage.getItem('donations')||'[]');
+      if(donations.length === 0) { donationSummary.textContent = 'Belum ada donasi test.'; return }
+      const total = donations.reduce((s,d)=>s+d.amount,0);
+      donationSummary.innerHTML = `Donasi test: <strong>IDR ${total.toLocaleString()}</strong> — ${donations.length} entri.`;
     }
+    renderDonationSummary();
+
+    // Volunteer (simpel)
+    const volForm = document.getElementById('volForm');
+    const volMsg = document.getElementById('volMsg');
+    volForm.addEventListener('submit', e=>{
+      e.preventDefault();
+      const nama = document.getElementById('nama').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const kota = document.getElementById('kota').value.trim();
+      const peran = document.getElementById('peran').value;
+      if(!nama || !email){ volMsg.textContent = 'Mohon isi nama dan email.'; return }
+      const volunteers = JSON.parse(localStorage.getItem('volunteers')||'[]');
+      volunteers.push({nama,email,kota,peran,joined:new Date().toISOString()});
+      localStorage.setItem('volunteers',JSON.stringify(volunteers));
+      volMsg.textContent = `Terima kasih ${nama}! Pendaftaran volunteer tercatat.`;
+      volForm.reset();
+    });
   </script>
 </body>
 </html>
